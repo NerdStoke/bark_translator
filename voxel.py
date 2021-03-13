@@ -121,7 +121,7 @@ class _streamProcessor(threading.Thread):
                     self.rt.reset_timer(time.time())
                 if self.pdat.recordflag:
                     if not self.wf:
-                        open(self)
+                        self.open()
                         #self.filename = time.strftime("%Y%m%d-%H%M%S.wav")
                         #print("opening file " + self.filename + "\r")
                         #self.wf = wave.open(self.filename, 'wb')
@@ -333,6 +333,7 @@ else:
     ## THIS MIGHT BE IT!!!!
     pdat.processor.close()
     #os.system('speaker-test -c2 --test=wav -w /usr/share/sounds/alsa/Front_Center.wav')
+    os.system('aplay /usr/share/sounds/alsa/Front_Center.wav')
     print(pdat.devrate)
     print(pdat.processor.pdat.devrate)
     print(int(pdat.pyaudio.get_device_info_by_index(pdat.devindex).get('defaultSampleRate')))
