@@ -34,7 +34,12 @@ iter = 1
 sub_array = np.empty((0,CHUNK),int)
 background = None
 
+data_file = open('data.pkl', 'wb')
+bg_file = open('bg.pkl', 'wb')
+
 while True:
+    data_file = open('data'+str(iter)+'.pkl', 'wb')
+    bg_file = open('bg'+str(iter)+'.pkl', 'wb')
     if iter % BG_CALC_RATE == 0:
         print(iter)
         print('-----')
@@ -56,8 +61,8 @@ while True:
     #print(sub_array)
     if background is not None:
         #print(spec_y[0]-background)
-        with open('data.pkl', 'wb') as fp:
-            pickle.dump(spec_y[0]-background,fp)
+        pickle.dump(spec_y[0],data_file)
+        pickle.dump(background,bg_file)
         #print(spec_y[0][-1],background[-1])
     #print(len(spec_y))
     #time.sleep(0.1)
