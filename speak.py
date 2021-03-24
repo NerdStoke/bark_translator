@@ -4,6 +4,7 @@
 # apt-get install python3-pyaudio python3-numpy libasound2-dev
 
 import argparse
+import os
 # Alsa blarg error blocking imports
 # See https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
 #     for original code
@@ -20,9 +21,18 @@ import time
 import numpy as np
 import queue
 import wave
+from gpiozero import PWMLED
 
 FORMAT = pyaudio.paInt32
 CHANNELS = 1
+LED = PWMLED(17)
+max_led_value = 1
+
+for i in range(3):
+    time.sleep(.25)
+    LED.value = 1
+    time.sleep(.25)
+    LED.value = 0
 
 class voxdat:
     def __init__(self):
@@ -124,8 +134,10 @@ class _recordTimer(threading.Thread):
         while self.pdat.running:
             if time.time() - self.timer < self.pdat.hangdelay:
                 self.pdat.recordflag = True
+                LED.value = max_led_value
             if time.time() - self.timer > self.pdat.hangdelay + 1:
                 self.pdat.recordflag = False
+                LED.value = 0
                 self.pdat.processor.close()
             if self.pdat.peakflag:
                 nf = min (self.pdat.current, 99)
