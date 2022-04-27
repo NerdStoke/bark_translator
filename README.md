@@ -1,10 +1,14 @@
 # bark_translator
+From this video:
+https://www.youtube.com/watch?v=GY33kZbClow
 
 ## Inspiration
 Based on https://github.com/russinnes/py-vox-recorder/blob/master/py-corder-osx.py
 
 ## Dependencies
 `apt-get install python3-pyaudio python3-numpy libasound2-dev`
+
+Also, there are some pip dependencies, but I forgot to pip freeze them lawl.
 
 ## Running
 
