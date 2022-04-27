@@ -329,11 +329,12 @@ else:
     print(int(pdat.pyaudio.get_device_info_by_index(pdat.devindex).get('defaultSampleRate')))
     pdat.processor.start()
 
+    print('starting stream processor')
 
     ## THIS MIGHT BE IT!!!!
-    pdat.processor.close()
+    #pdat.processor.close()
     #os.system('speaker-test -c2 --test=wav -w /usr/share/sounds/alsa/Front_Center.wav')
-    os.system('aplay /usr/share/sounds/alsa/Front_Center.wav')
+    #os.system('aplay /usr/share/sounds/alsa/Front_Center.wav')
     print(pdat.devrate)
     print(pdat.processor.pdat.devrate)
     print(int(pdat.pyaudio.get_device_info_by_index(pdat.devindex).get('defaultSampleRate')))
@@ -367,6 +368,16 @@ else:
 
     #print('turning stream back on')
     #pdat.devstream.start_stream()
+
+    print('closing file from processor')
+    pdat.processor.close()
+    #os.system('speaker-test -c2 --test=wav -w /usr/share/sounds/alsa/Front_Center.wav')
+    os.system('aplay /usr/share/sounds/alsa/Front_Center.wav')
+    print(pdat.devrate)
+    print(pdat.processor.pdat.devrate)
+    print(int(pdat.pyaudio.get_device_info_by_index(pdat.devindex).get('defaultSampleRate')))
+
+
 
 
     pdat.km = KBListener(pdat)
